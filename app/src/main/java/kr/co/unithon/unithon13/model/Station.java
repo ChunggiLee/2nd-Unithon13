@@ -1,12 +1,63 @@
 package kr.co.unithon.unithon13.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.simpleframework.xml.Element;
+
+import lombok.Getter;
 
 /**
  * Created by daehyun on 16. 2. 13..
  */
-public class Station {
-//    <STATION_CD>0413</STATION_CD>
+
+public class Station implements Parcelable{
+    public Station() {
+    }
+
+    protected Station(Parcel in) {
+        stationCode = in.readString();
+        name = in.readString();
+        lineNum = in.readString();
+        frCode = in.readString();
+    }
+
+    public static final Creator<Station> CREATOR = new Creator<Station>() {
+        @Override
+        public Station createFromParcel(Parcel in) {
+            return new Station(in);
+        }
+
+        @Override
+        public Station[] newArray(int size) {
+            return new Station[size];
+        }
+    };
+
+    public Station(String stationCode, String name, String lineNum, String frCode) {
+        this.stationCode = stationCode;
+        this.name = name;
+        this.lineNum = lineNum;
+        this.frCode = frCode;
+    }
+
+    public String getStationCode() {
+        return stationCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLineNum() {
+        return lineNum;
+    }
+
+    public String getFrCode() {
+        return frCode;
+    }
+
+    //    <STATION_CD>0413</STATION_CD>
 //    <STATION_NM>쌍문</STATION_NM>
 //    <LINE_NUM>4</LINE_NUM>
 //    <FR_CODE>413</FR_CODE>
@@ -22,15 +73,29 @@ public class Station {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("STATION_CODE:");
-        builder.append(stationCode);
-        builder.append("STATION_NAME:");
         builder.append(name);
-        builder.append("LINE_NUM:");
-        builder.append(lineNum);
-        builder.append("fr CODE");
-        builder.append(frCode);
+//        builder.append("STATION_CODE:");
+//        builder.append(stationCode);
+//        builder.append("STATION_NAME:");
+//        builder.append(name);
+//        builder.append("LINE_NUM:");
+//        builder.append(lineNum);
+//        builder.append("fr CODE");
+//        builder.append(frCode);
 
         return builder.toString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(stationCode);
+        dest.writeString(name);
+        dest.writeString(lineNum);
+        dest.writeString(frCode);
     }
 }

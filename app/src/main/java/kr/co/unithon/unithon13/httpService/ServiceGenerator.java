@@ -22,11 +22,20 @@ public class ServiceGenerator {
             .setClient(new OkClient(new OkHttpClient()));
 
     public static <S> S createService(Class<S> serviceClass) {
+        builder =  new RestAdapter.Builder()
+                .setEndpoint(API_BASE_URL + API_AUTH_KEY)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setConverter(new SimpleXMLConverter())
+                .setClient(new OkClient(new OkHttpClient()));
         RestAdapter adapter = builder.build();
         return adapter.create(serviceClass);
     }
     public static  <S> S createPathService(Class<S> serviceClass) {
-        builder.setEndpoint(API_PATH_URL + API_AUTH_KEY);
+        builder = new RestAdapter.Builder()
+                .setEndpoint(API_PATH_URL+ API_AUTH_KEY)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setConverter( new SimpleXMLConverter())
+                .setClient(new OkClient(new OkHttpClient()));
         RestAdapter adapter = builder.build();
         return adapter.create(serviceClass);
     }

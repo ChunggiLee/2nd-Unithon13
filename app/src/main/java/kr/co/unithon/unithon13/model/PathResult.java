@@ -1,5 +1,8 @@
 package kr.co.unithon.unithon13.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import lombok.ToString;
 
 /**
@@ -36,7 +39,7 @@ import lombok.ToString;
 
 
 @ToString
-public class PathResult {
+public class PathResult implements Parcelable{
 
         public int rowNum;
         public int selectedCount;
@@ -62,4 +65,168 @@ public class PathResult {
         public String shtStatnXy;
         public String minStatnXy;
 
+    protected PathResult(Parcel in) {
+        rowNum = in.readInt();
+        selectedCount = in.readInt();
+        totalCount = in.readInt();
+        statnFid = in.readString();
+        statnTid = in.readString();
+        statnFnm = in.readString();
+        statnTnm = in.readString();
+        shtStatnId = in.readString();
+        shtStatnNm = in.readString();
+        shtTransferMsg = in.readString();
+        shtTravelMsg = in.readString();
+        shtStatnCnt = in.readInt();
+        shtTravelTm = in.readInt();
+        shtTransferCnt = in.readInt();
+        minStatnId = in.readString();
+        minStatnNm = in.readString();
+        minTransferMsg = in.readString();
+        minTravelMsg = in.readString();
+        minStatnCnt = in.readString();
+        minTravelTm = in.readInt();
+        minTransferCnt = in.readInt();
+        shtStatnXy = in.readString();
+        minStatnXy = in.readString();
+    }
+
+    public static final Creator<PathResult> CREATOR = new Creator<PathResult>() {
+        @Override
+        public PathResult createFromParcel(Parcel in) {
+            return new PathResult(in);
+        }
+
+        @Override
+        public PathResult[] newArray(int size) {
+            return new PathResult[size];
+        }
+    };
+
+    public PathResult() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(rowNum);
+        dest.writeInt(selectedCount);
+        dest.writeInt(totalCount);
+        dest.writeString(statnFid);
+        dest.writeString(statnTid);
+        dest.writeString(statnFnm);
+        dest.writeString(statnTnm);
+        dest.writeString(shtStatnId);
+        dest.writeString(shtStatnNm);
+        dest.writeString(shtTransferMsg);
+        dest.writeString(shtTravelMsg);
+        dest.writeInt(shtStatnCnt);
+        dest.writeInt(shtTravelTm);
+        dest.writeInt(shtTransferCnt);
+        dest.writeString(minStatnId);
+        dest.writeString(minStatnNm);
+        dest.writeString(minTransferMsg);
+        dest.writeString(minTravelMsg);
+        dest.writeString(minStatnCnt);
+        dest.writeInt(minTravelTm);
+        dest.writeInt(minTransferCnt);
+        dest.writeString(shtStatnXy);
+        dest.writeString(minStatnXy);
+    }
+
+    public int getRowNum() {
+        return rowNum;
+    }
+
+    public int getSelectedCount() {
+        return selectedCount;
+    }
+
+    public int getTotalCount() {
+        return totalCount;
+    }
+
+    public String getStatnFid() {
+        return statnFid;
+    }
+
+    public String getStatnTid() {
+        return statnTid;
+    }
+
+    public String getStatnFnm() {
+        return statnFnm;
+    }
+
+    public String getStatnTnm() {
+        return statnTnm;
+    }
+
+    public String getShtStatnId() {
+        return shtStatnId;
+    }
+
+    public String getShtStatnNm() {
+        return shtStatnNm;
+    }
+
+    public String getShtTransferMsg() {
+        return shtTransferMsg;
+    }
+
+    public String getShtTravelMsg() {
+        return shtTravelMsg;
+    }
+
+    public int getShtStatnCnt() {
+        return shtStatnCnt;
+    }
+
+    public int getShtTravelTm() {
+        return shtTravelTm;
+    }
+
+    public int getShtTransferCnt() {
+        return shtTransferCnt;
+    }
+
+    public String getMinStatnId() {
+        return minStatnId;
+    }
+
+    public String getMinStatnNm() {
+        return minStatnNm;
+    }
+
+    public String getMinTransferMsg() {
+        return minTransferMsg;
+    }
+
+    public String getMinTravelMsg() {
+        return minTravelMsg;
+    }
+
+    public String getMinStatnCnt() {
+        return minStatnCnt;
+    }
+
+    public int getMinTravelTm() {
+        return minTravelTm;
+    }
+
+    public int getMinTransferCnt() {
+        return minTransferCnt;
+    }
+
+    public String getShtStatnXy() {
+        return shtStatnXy;
+    }
+
+    public String getMinStatnXy() {
+        return minStatnXy;
+    }
 }

@@ -6,19 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".ResultActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay">
-        <!--<ImageView-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:src="@drawable/logo_icon"-->
-            <!--android:layout_marginLeft="19dp"-->
-            <!--android:layout_gravity="left">-->
-        <!--</ImageView>-->
+
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -30,7 +25,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <include layout="@layout/content_main"/>
+    <include layout="@layout/content_result"/>
 
 </android.support.design.widget.CoordinatorLayout>
