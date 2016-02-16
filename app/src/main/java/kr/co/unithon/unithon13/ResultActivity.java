@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,17 +22,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import kr.co.unithon.unithon13.model.PathResult;
-import kr.co.unithon.unithon13.model.Station;
+import kr.co.unithon.unithon13.model.SwStation;
 
 public class ResultActivity extends AppCompatActivity {
     private static long  MIN_MILLISECONDS =60000;
     private Toolbar toolbar;
-    private Station srcStation;
-    private Station dstStation;
+    private SwStation mSrcSwStation;
+    private SwStation mDstSwStation;
     private PathResult mPathResult;
 
     private ImageView srcStnPin;
@@ -38,6 +40,7 @@ public class ResultActivity extends AppCompatActivity {
     private TextView mTravelCntLabel;
     private TextView mTravelTimeLabel;
 
+    private Button mBtnConfirm;
     private NumberPicker mDaynightpicker;
     private NumberPicker mHourPicker;
     private NumberPicker mMinPicker;
@@ -49,27 +52,29 @@ public class ResultActivity extends AppCompatActivity {
     private Date arrivalTime;
     Calendar calendar;
     Calendar arCalendar;
+//    public static String[] Line = new String[]{"1호선", "2호선", "3호선", "4호선", "5호선", "6호선", "7호선", "8호선", "9호선", "중앙", "분당선"
+//            , "경의선", "에버라인", "경춘선", "신분당선", "인천1호선"};
     private static Map<String,Integer> pinMap = new HashMap<>();
     static {
-        pinMap.put("1",R.drawable.pin_line_1);
-        pinMap.put("2",R.drawable.pin_line_2);
-        pinMap.put("3",R.drawable.pin_line_3);
-        pinMap.put("4",R.drawable.pin_line_4);
-        pinMap.put("5",R.drawable.pin_line_5);
-        pinMap.put("6",R.drawable.pin_line_6);
-        pinMap.put("7",R.drawable.pin_line_7);
-        pinMap.put("8",R.drawable.pin_line_8);
-        pinMap.put("9",R.drawable.pin_line_9);
-        pinMap.put("i",R.drawable.pin_line_i);
-        pinMap.put("a",R.drawable.pin_line_a);
-        pinMap.put("b",R.drawable.pin_line_b);
-        pinMap.put("e",R.drawable.pin_line_e);
-        pinMap.put("g",R.drawable.pin_line_g);
-        pinMap.put("i",R.drawable.pin_line_i);
-        pinMap.put("k",R.drawable.pin_line_k);
-        pinMap.put("s",R.drawable.pin_line_s);
-        pinMap.put("su",R.drawable.pin_line_su);
-        pinMap.put("u",R.drawable.pin_line_u);
+        pinMap.put("1호선",R.drawable.pin_line_1);
+        pinMap.put("2호선",R.drawable.pin_line_2);
+        pinMap.put("3호선",R.drawable.pin_line_3);
+        pinMap.put("4호선",R.drawable.pin_line_4);
+        pinMap.put("5호선",R.drawable.pin_line_5);
+        pinMap.put("6호선",R.drawable.pin_line_6);
+        pinMap.put("7호선",R.drawable.pin_line_7);
+        pinMap.put("8호선",R.drawable.pin_line_8);
+        pinMap.put("9호선",R.drawable.pin_line_9);
+        pinMap.put("인천호선",R.drawable.pin_line_i);
+        pinMap.put("공항철도",R.drawable.pin_line_a);
+        pinMap.put("분당선",R.drawable.pin_line_b);
+        pinMap.put("에버라인",R.drawable.pin_line_e);
+        pinMap.put("경춘선",R.drawable.pin_line_g);
+        pinMap.put("경의선",R.drawable.pin_line_k);
+        pinMap.put("중앙선",R.drawable.pin_line_k);
+        pinMap.put("신분당선",R.drawable.pin_line_s);
+        pinMap.put("수원선",R.drawable.pin_line_su);
+        pinMap.put("의정부선",R.drawable.pin_line_u);
     }
 //    private static final String daynight = ["",""];
 
@@ -79,8 +84,8 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         Bundle bundle =getIntent().getExtras();
-        srcStation = bundle.getParcelable("src_stn");
-        dstStation = bundle.getParcelable("dst_stn");
+        mSrcSwStation = bundle.getParcelable("src_stn");
+        mDstSwStation = bundle.getParcelable("dst_stn");
         mPathResult = bundle.getParcelable("path_result");
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,6 +94,7 @@ public class ResultActivity extends AppCompatActivity {
         setupActionBar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mBtnConfirm = (Button)findViewById(R.id.btn_confirm);
         srcStnPin = (ImageView)findViewById(R.id.src_stn_pin);
         dstStnPin = (ImageView)findViewById(R.id.dst_stn_pin);
 
@@ -99,8 +105,8 @@ public class ResultActivity extends AppCompatActivity {
 
 
         //init pin section
-        int srcPinResId = pinMap.get(srcStation.getLineNum().toLowerCase());
-        int dstPinResId = pinMap.get(dstStation.getLineNum().toLowerCase());
+        int srcPinResId = pinMap.get(mSrcSwStation.getLineNum().toLowerCase());
+        int dstPinResId = pinMap.get(mDstSwStation.getLineNum().toLowerCase());
 
         srcStnPin.setImageResource(srcPinResId);
         dstStnPin.setImageResource(dstPinResId);
@@ -109,8 +115,8 @@ public class ResultActivity extends AppCompatActivity {
         mTravelTimeLabel.setText(mPathResult.getMinTravelTm()+"");
 
 
-        ((TextView)findViewById(R.id.src_stn_label)).setText(srcStation.getName());
-        ((TextView)findViewById(R.id.dst_stn_label)).setText(dstStation.getName());
+        ((TextView)findViewById(R.id.src_stn_label)).setText(mSrcSwStation.getName());
+        ((TextView)findViewById(R.id.dst_stn_label)).setText(mDstSwStation.getName());
 //        ((TextView)findViewById(R.id.tv_time)).setText(mPathResult.toString());
 
         mDaynightpicker = (NumberPicker) findViewById(R.id.picker_daynight);
@@ -161,7 +167,13 @@ public class ResultActivity extends AppCompatActivity {
         mMinPicker.setValue(minute);
 
         updateArrivalTimeUI();
-
+        mBtnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotiUtils.Notify(getApplication(), mSrcSwStation.getName(), arrivalTime.getTime(), arrivalTime.getTime()-currentTime.getTime());
+                Toast.makeText(ResultActivity.this,"알람이 설정되었습니다.",Toast.LENGTH_LONG).show();
+            }
+        });
 
         mDaynightpicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
@@ -194,7 +206,14 @@ public class ResultActivity extends AppCompatActivity {
             arrivalDaynightLabel.setText("오후");
 
         }
-        String ar_str = String.format("%02d", calendar.get(Calendar.HOUR))+ ":" + calendar.get(Calendar.MINUTE);
+
+        String hour_str;
+        if(calendar.get(Calendar.HOUR) == 0) {
+            hour_str = "12";
+        } else {
+            hour_str = String.format("%02d", calendar.get(Calendar.HOUR));
+        }
+        String ar_str = hour_str+ ":" + String.format("%02d",calendar.get(Calendar.MINUTE));
         arrivalTimeLabel.setText(ar_str);
     }
 

@@ -7,8 +7,7 @@ import org.simpleframework.xml.Root;
 import java.util.List;
 
 import kr.co.unithon.unithon13.model.Result;
-import kr.co.unithon.unithon13.model.Station;
-import kr.co.unithon.unithon13.model.SwResult;
+import kr.co.unithon.unithon13.model.SwStation;
 
 /**
  * Created by daehyun on 16. 2. 13..
@@ -19,7 +18,7 @@ public class StationListResponse {
     public int listCount;
 
     @ElementList(entry="row", inline=true)
-    public List<Station> stations;
+    public List<SwStation> mSwStations;
     @Element(name="RESULT")
     public Result result;
 

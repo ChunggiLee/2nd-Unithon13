@@ -1,6 +1,5 @@
 package kr.co.unithon.unithon13.httpService;
 
-import kr.co.unithon.unithon13.model.Station;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;

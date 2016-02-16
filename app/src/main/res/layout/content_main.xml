@@ -10,120 +10,122 @@
                 tools:context="com.example.sin.hongdaegangnam.MainActivity"
                 tools:showIn="@layout/activity_main">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="38.67dp">
+            android:orientation="vertical"
+            android:weightSum="1">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_arrow_backward"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="22.67dp"/>
+                android:orientation="horizontal"
+                android:paddingTop="38.67dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="15.33dp"
+                    android:layout_height="13.67dp"
+                    android:background="@drawable/leftarrow"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="22.67dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="출발역"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="2dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10.33dp"
+                android:layout_marginLeft="19dp"
+                android:id="@+id/src_stn_section"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/start_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/startbtn"
+                    android:textSize="25dp"
+                    android:textColor="#ffffff"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="출발역"
-                android:textSize="18sp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginTop="25dp">
+
+                <ImageView
+                    android:layout_width="15.33dp"
+                    android:layout_height="13.67dp"
+                    android:background="@drawable/rightarrow"
+                    android:layout_marginLeft="22.67dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="도착역"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="2dp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="19dp"
+                android:id="@+id/dst_stn_section">
+
+                <Button
+                    android:id="@+id/arrival_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/arrivalbtn"
+                    android:gravity="center"
+                    android:textSize="25dp"
+                    android:textColor="#ffffff"/>
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:orientation="horizontal"
-            android:background="#ffccff"
-            android:layout_marginTop="10.33dp"
-            android:layout_marginLeft="19dp"
-            android:id="@+id/src_stn_section">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="87dp"
-                android:gravity="center_vertical"
-                android:text="동대입구"
-                android:textSize="25sp"
-                android:textColor="#ffffff"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_arrow_forward"
-                android:layout_marginLeft="22.67dp"
-                android:layout_gravity="center_vertical"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
-                android:text="도착역"
-                android:textSize="18sp"
-                android:layout_marginLeft="5dp"/>
+        <Button
+            android:layout_width="335.33dp"
+            android:layout_height="56.6dp"
+            android:id="@+id/btn_find_path"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="12.67dp"
+            tools:layout_marginBottom="54dp"
+            android:paddingRight="1dp"
+            android:layout_marginLeft="12.33dp"
+            android:layout_marginRight="12.33dp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="190.67dp"
+            android:background="@drawable/pathset"
+            android:layout_centerHorizontal="true"/>
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_marginTop="10.33dp"
-            android:background="#00aadd"
-            android:layout_marginRight="19dp"
-            android:id="@+id/dst_stn_section">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="87dp"
-                android:gravity="center_vertical"
-                android:text="대모산입구"
-                android:textSize="25sp"
-                android:textColor="#ffffff"/>
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_find_path"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12.67dp"
-        tools:layout_marginBottom="54dp"
-        android:paddingRight="1dp"
-        android:layout_marginLeft="12.33dp"
-        android:layout_marginRight="12.33dp"
-        android:background="@drawable/bg_btn_path"
-        android:textColor="#ffffff"
-        android:layout_marginTop="190.67dp"
-        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
 
